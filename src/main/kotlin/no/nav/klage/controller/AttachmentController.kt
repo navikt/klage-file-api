@@ -7,6 +7,7 @@ import org.springframework.http.MediaType
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
 import org.springframework.web.multipart.MultipartFile
+import java.io.FileNotFoundException
 
 @RestController
 @RequestMapping("attachment")
@@ -14,10 +15,14 @@ class AttachmentController(private val attachmentService: AttachmentService) {
 
     @GetMapping("{id}")
     fun getAttachment(@PathVariable("id") id: String): ResponseEntity<Resource> {
-        val resource = attachmentService.getAttachmentAsResource(id)
-        return ResponseEntity.ok()
-            .contentType(MediaType.APPLICATION_OCTET_STREAM)
-            .body(resource)
+        return try {
+            val resource = attachmentService.getAttachmentAsResource(id)
+            ResponseEntity.ok()
+                .contentType(MediaType.APPLICATION_OCTET_STREAM)
+                .body(resource)
+        } catch (fnfe: FileNotFoundException) {
+            ResponseEntity.notFound().build()
+        }
     }
 
     @PostMapping

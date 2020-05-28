@@ -10,6 +10,7 @@ import org.springframework.core.io.ByteArrayResource
 import org.springframework.core.io.Resource
 import org.springframework.stereotype.Service
 import org.springframework.web.multipart.MultipartFile
+import java.io.FileNotFoundException
 import java.util.*
 
 @Service
@@ -25,7 +26,13 @@ class AttachmentService(private val gcsStorage: Storage) {
 
     fun getAttachmentAsResource(id: String): Resource {
         logger.debug("Getting attachment with id {}", id)
-        return ByteArrayResource(gcsStorage.get(bucket, id).getContent())
+
+        val blob = gcsStorage.get(bucket, id)
+        if (!blob.exists()) {
+            throw FileNotFoundException()
+        }
+
+        return ByteArrayResource(blob.getContent())
     }
 
     fun deleteAttachment(id: String) {
