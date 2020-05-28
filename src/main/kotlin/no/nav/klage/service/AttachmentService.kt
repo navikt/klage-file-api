@@ -28,7 +28,8 @@ class AttachmentService(private val gcsStorage: Storage) {
         logger.debug("Getting attachment with id {}", id)
 
         val blob = gcsStorage.get(bucket, id)
-        if (!blob.exists()) {
+        if (blob == null || !blob.exists()) {
+            logger.warn("Attachment not found: {}", id)
             throw FileNotFoundException()
         }
 
