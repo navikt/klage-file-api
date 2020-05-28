@@ -21,8 +21,4 @@ management:
       prometheus:
         enabled: true
 
-# Local environment settings. Can be overridden in dev and prod.
-
-NAIS_APP_NAME: klage-vedlegg-api
-
 GCS_BUCKET: klagevedlegg
