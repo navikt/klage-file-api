@@ -1,0 +1,28 @@
+spring:
+  main:
+    banner-mode: OFF
+
+server:
+  port: 7080
+  error:
+    whitelabel:
+      enabled: false
+
+management:
+  endpoint:
+    health:
+      show-details: always
+  endpoints.web:
+    exposure:
+      include: info, health, metrics, prometheus
+    base-path: "/internal"
+  metrics:
+    export:
+      prometheus:
+        enabled: true
+
+# Local environment settings. Can be overridden in dev and prod.
+
+NAIS_APP_NAME: klage-vedlegg-api
+
+GCS_BUCKET: klagevedlegg
