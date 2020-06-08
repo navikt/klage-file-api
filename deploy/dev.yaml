@@ -8,6 +8,11 @@ metadata:
 spec:
   image: {{ image }}
   port: 7080
+  accessPolicy:
+    inbound:
+      rules:
+        - application: klage-arkiver-journalpost
+        - application: klage-dittnav-api
   liveness:
     path: /internal/health
     initialDelay: 20
