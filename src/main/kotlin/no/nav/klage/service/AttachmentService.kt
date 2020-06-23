@@ -38,7 +38,13 @@ class AttachmentService(private val gcsStorage: Storage) {
 
     fun deleteAttachment(id: String): Boolean {
         logger.debug("Deleting attachment with id {}", id)
-        return gcsStorage.delete(BlobId.of(bucket, id))
+        return gcsStorage.delete(BlobId.of(bucket, id)).also {
+            if (it) {
+                logger.debug("Attachment was deleted.")
+            } else {
+                logger.debug("Attachment was not found and could not be deleted.")
+            }
+        }
     }
 
     fun saveAttachment(file: MultipartFile): String {

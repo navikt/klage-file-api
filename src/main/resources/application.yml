@@ -1,6 +1,15 @@
 spring:
   main:
     banner-mode: OFF
+  sleuth:
+    propagation-keys:
+      - Nav-Callid
+      - Nav-Consumer-Id
+    log:
+      slf4j:
+        whitelisted-mdc-keys:
+          - Nav-Callid
+          - Nav-Consumer-Id
 
 server:
   port: 7080
@@ -22,3 +31,6 @@ management:
         enabled: true
 
 GCS_BUCKET: klagevedlegg
+
+navCallId: Nav-Callid
+navConsumerId: Nav-Consumer-Id
