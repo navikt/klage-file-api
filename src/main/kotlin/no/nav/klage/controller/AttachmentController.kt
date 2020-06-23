@@ -32,8 +32,8 @@ class AttachmentController(private val attachmentService: AttachmentService) {
     }
 
     @DeleteMapping("{id}")
-    fun deleteAttachment(@PathVariable("id") id: String) {
-        attachmentService.deleteAttachment(id)
+    fun deleteAttachment(@PathVariable("id") id: String): Boolean {
+        return attachmentService.deleteAttachment(id)
     }
 
     data class AttachmentCreatedResponse(val id: String)
