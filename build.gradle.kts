@@ -1,6 +1,8 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 val gcsVersion = "1.108.0"
+val logstashVersion = "5.1"
+val springSleuthVersion = "2.2.3.RELEASE"
 
 repositories {
     mavenCentral()
@@ -23,9 +25,11 @@ dependencies {
     implementation("org.springframework.boot:spring-boot-starter-actuator")
     implementation("org.springframework.boot:spring-boot-starter-webflux")
     implementation("org.projectreactor:reactor-spring:1.0.1.RELEASE")
+    implementation("org.springframework.cloud:spring-cloud-starter-sleuth:$springSleuthVersion")
 
     implementation("io.micrometer:micrometer-registry-prometheus")
     implementation("ch.qos.logback:logback-classic")
+    implementation("net.logstash.logback:logstash-logback-encoder:$logstashVersion")
     implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
 
     implementation("com.google.cloud:google-cloud-storage:$gcsVersion")

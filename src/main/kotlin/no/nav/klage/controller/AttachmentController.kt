@@ -1,5 +1,6 @@
 package no.nav.klage.controller
 
+import no.nav.klage.getLogger
 import no.nav.klage.service.AttachmentService
 import org.springframework.core.io.Resource
 import org.springframework.http.HttpStatus
@@ -13,8 +14,14 @@ import java.io.FileNotFoundException
 @RequestMapping("attachment")
 class AttachmentController(private val attachmentService: AttachmentService) {
 
+    companion object {
+        @Suppress("JAVA_CLASS_ON_COMPANION")
+        private val logger = getLogger(javaClass.enclosingClass)
+    }
+
     @GetMapping("{id}")
     fun getAttachment(@PathVariable("id") id: String): ResponseEntity<Resource> {
+        logger.debug("Get attachment requested with id {}", id)
         return try {
             val resource = attachmentService.getAttachmentAsResource(id)
             ResponseEntity.ok()
@@ -27,12 +34,14 @@ class AttachmentController(private val attachmentService: AttachmentService) {
 
     @PostMapping
     fun addAttachment(@RequestParam("file") file: MultipartFile): ResponseEntity<AttachmentCreatedResponse> {
+        logger.debug("Add attachment requested.")
         val id = attachmentService.saveAttachment(file)
         return ResponseEntity(AttachmentCreatedResponse(id), HttpStatus.CREATED)
     }
 
     @DeleteMapping("{id}")
     fun deleteAttachment(@PathVariable("id") id: String): Boolean {
+        logger.debug("Delete attachment requested.")
         return attachmentService.deleteAttachment(id)
     }
 
