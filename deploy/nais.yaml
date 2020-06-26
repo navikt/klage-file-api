@@ -42,7 +42,11 @@ spec:
   webproxy: true
   gcp:
     buckets:
-      - name: klagevedlegg
+    {{#each buckets}}
+       - name: {{this}}
+    {{/each}}
   env:
-    - name: GCS_BUCKET
-      value: klagevedlegg
+    {{#each env}}
+       - name: {{@key}}
+         value: "{{this}}"
+    {{/each}}

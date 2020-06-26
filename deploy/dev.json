@@ -1,0 +1,8 @@
+{
+  "buckets": [
+    "klagevedlegg-dev"
+  ],
+  "env": {
+    "GCS_BUCKET": "klagevedlegg-dev"
+  }
+}
