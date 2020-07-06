@@ -1,8 +1,8 @@
 {
   "buckets": [
-    "klagevedlegg-prod"
+    "klagevedlegg"
   ],
   "env": {
-    "GCS_BUCKET": "klagevedlegg-prod"
+    "GCS_BUCKET": "klagevedlegg"
   }
 }
