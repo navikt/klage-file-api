@@ -10,7 +10,7 @@ on:
       - '.github/workflows/alerts-deploy.yaml'
 jobs:
   apply-alerts:
-    name: Apply alerts to cluster
+    name: Apply alerts to clusters
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
