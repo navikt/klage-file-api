@@ -2,7 +2,7 @@ package no.nav.klage.service
 
 import com.google.cloud.storage.BlobId
 import com.google.cloud.storage.BlobInfo
-import com.google.cloud.storage.Storage
+import com.google.cloud.storage.StorageOptions
 import no.nav.klage.getLogger
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.core.io.ByteArrayResource
@@ -14,7 +14,7 @@ import java.io.FileNotFoundException
 import java.util.*
 
 @Service
-class AttachmentService(private val gcsStorage: Storage) {
+class AttachmentService {
 
     companion object {
         @Suppress("JAVA_CLASS_ON_COMPANION")
@@ -27,7 +27,7 @@ class AttachmentService(private val gcsStorage: Storage) {
     fun getAttachmentAsResource(id: String): Resource {
         logger.debug("Getting attachment with id {}", id)
 
-        val blob = gcsStorage.get(bucket, id)
+        val blob = getGcsStorage().get(bucket, id)
         if (blob == null || !blob.exists()) {
             logger.warn("Attachment not found: {}", id)
             throw FileNotFoundException()
@@ -38,7 +38,7 @@ class AttachmentService(private val gcsStorage: Storage) {
 
     fun deleteAttachment(id: String): Boolean {
         logger.debug("Deleting attachment with id {}", id)
-        return gcsStorage.delete(BlobId.of(bucket, id)).also {
+        return getGcsStorage().delete(BlobId.of(bucket, id)).also {
             if (it) {
                 logger.debug("Attachment was deleted.")
             } else {
@@ -53,11 +53,13 @@ class AttachmentService(private val gcsStorage: Storage) {
         val id = UUID.randomUUID().toString()
 
         val blobInfo = BlobInfo.newBuilder(BlobId.of(bucket, id)).build()
-        gcsStorage.create(blobInfo, file.bytes)
+        getGcsStorage().create(blobInfo, file.bytes)
 
         logger.debug("Attachment saved, and id is {}", id)
 
         return id
     }
+
+    private fun getGcsStorage() = StorageOptions.getDefaultInstance().service
 
 }
