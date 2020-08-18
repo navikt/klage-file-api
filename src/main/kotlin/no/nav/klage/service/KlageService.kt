@@ -14,7 +14,7 @@ import java.io.FileNotFoundException
 import java.util.*
 
 @Service
-class AttachmentService {
+class KlageService {
 
     companion object {
         @Suppress("JAVA_CLASS_ON_COMPANION")
@@ -24,43 +24,43 @@ class AttachmentService {
     @Value("\${GCS_BUCKET}")
     private lateinit var bucket: String
 
-    fun getAttachmentAsResource(id: String): Resource {
-        logger.debug("Getting attachment with id {}", id)
+    fun getKlageAsResource(id: String): Resource {
+        logger.debug("Getting klage with id {}", id)
 
         val blob = getGcsStorage().get(bucket, id.toPath())
         if (blob == null || !blob.exists()) {
-            logger.warn("Attachment not found: {}", id)
+            logger.warn("Klage not found: {}", id)
             throw FileNotFoundException()
         }
 
         return ByteArrayResource(blob.getContent())
     }
 
-    fun deleteAttachment(id: String): Boolean {
-        logger.debug("Deleting attachment with id {}", id)
+    fun deleteKlage(id: String): Boolean {
+        logger.debug("Deleting klage with id {}", id)
         return getGcsStorage().delete(BlobId.of(bucket, id.toPath())).also {
             if (it) {
-                logger.debug("Attachment was deleted.")
+                logger.debug("Klage was deleted.")
             } else {
-                logger.debug("Attachment was not found and could not be deleted.")
+                logger.debug("Klage was not found and could not be deleted.")
             }
         }
     }
 
-    fun saveAttachment(file: MultipartFile): String {
-        logger.debug("Saving attachment")
+    fun saveKlage(file: MultipartFile): String {
+        logger.debug("Saving klage")
 
         val id = UUID.randomUUID().toString()
 
         val blobInfo = BlobInfo.newBuilder(BlobId.of(bucket, id.toPath())).build()
         getGcsStorage().create(blobInfo, file.bytes)
 
-        logger.debug("Attachment saved, and id is {}", id)
+        logger.debug("Klage saved, and id is {}", id)
 
         return id
     }
 
-    private fun String.toPath() = "attachment/$this"
+    private fun String.toPath() = "klage/$this"
 
     private fun getGcsStorage() = StorageOptions.getDefaultInstance().service
 
