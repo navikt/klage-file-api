@@ -1,2 +1,2 @@
-# klage-vedlegg-api
-API for mellomlagring av vedlegg til klager.
+# klage-file-api
+API for mellomlagring av filer til klager.
