@@ -34,7 +34,7 @@ management:
       prometheus:
         enabled: true
 
-GCS_BUCKET: klagevedlegg
+GCS_BUCKET: klagefiles
 
 navCallId: Nav-Callid
 navConsumerId: Nav-Consumer-Id
