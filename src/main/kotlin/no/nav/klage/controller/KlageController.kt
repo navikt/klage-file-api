@@ -32,11 +32,11 @@ class KlageController(private val klageService: KlageService) {
         }
     }
 
-    @PostMapping
-    fun addKlage(@RequestParam("file") file: MultipartFile): ResponseEntity<KlageCreatedResponse> {
+    @PostMapping("{id}")
+    fun addKlage(@PathVariable("id") id: String, @RequestParam("file") file: MultipartFile): ResponseEntity<KlageCreatedResponse> {
         logger.debug("Add klage requested.")
-        val id = klageService.saveKlage(file)
-        return ResponseEntity(KlageCreatedResponse(id), HttpStatus.CREATED)
+        val result = klageService.saveKlage(file, id)
+        return ResponseEntity(KlageCreatedResponse(result), HttpStatus.CREATED)
     }
 
     @DeleteMapping("{id}")
@@ -45,5 +45,5 @@ class KlageController(private val klageService: KlageService) {
         return klageService.deleteKlage(id)
     }
 
-    data class KlageCreatedResponse(val id: String)
+    data class KlageCreatedResponse(val created: Boolean)
 }

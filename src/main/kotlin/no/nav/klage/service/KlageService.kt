@@ -47,17 +47,15 @@ class KlageService {
         }
     }
 
-    fun saveKlage(file: MultipartFile): String {
+    fun saveKlage(file: MultipartFile, id: String): Boolean {
         logger.debug("Saving klage")
 
-        val id = UUID.randomUUID().toString()
-
         val blobInfo = BlobInfo.newBuilder(BlobId.of(bucket, id.toPath())).build()
-        getGcsStorage().create(blobInfo, file.bytes)
+        val result = getGcsStorage().create(blobInfo, file.bytes).exists()
 
         logger.debug("Klage saved, and id is {}", id)
 
-        return id
+        return result
     }
 
     private fun String.toPath() = "klage/$this"
