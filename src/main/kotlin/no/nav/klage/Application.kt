@@ -4,8 +4,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication
 
 @SpringBootApplication
-class KlageVedleggAPIApplication
+class KlageFileAPIApplication
 
 fun main() {
-    runApplication<KlageVedleggAPIApplication>()
+    runApplication<KlageFileAPIApplication>()
 }
