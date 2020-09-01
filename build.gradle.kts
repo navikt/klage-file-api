@@ -4,6 +4,7 @@ val gcsVersion = "1.108.0"
 val logstashVersion = "5.1"
 val springSleuthVersion = "2.2.3.RELEASE"
 val tokenValidationVersion = "1.3.0"
+val oidcSupportVersion = "0.2.18"
 
 repositories {
     mavenCentral()
@@ -33,6 +34,7 @@ dependencies {
     implementation("net.logstash.logback:logstash-logback-encoder:$logstashVersion")
     implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
     implementation("no.nav.security:token-validation-spring:$tokenValidationVersion")
+    implementation("no.nav.security:oidc-spring-support:$oidcSupportVersion")
 
     implementation("com.google.cloud:google-cloud-storage:$gcsVersion")
 
