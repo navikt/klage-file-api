@@ -3,6 +3,7 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 val gcsVersion = "1.108.0"
 val logstashVersion = "5.1"
 val springSleuthVersion = "2.2.3.RELEASE"
+val tokenValidationVersion = "1.3.0"
 
 repositories {
     mavenCentral()
@@ -31,6 +32,7 @@ dependencies {
     implementation("ch.qos.logback:logback-classic")
     implementation("net.logstash.logback:logstash-logback-encoder:$logstashVersion")
     implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
+    implementation("no.nav.security:token-validation-spring:$tokenValidationVersion")
 
     implementation("com.google.cloud:google-cloud-storage:$gcsVersion")
 
