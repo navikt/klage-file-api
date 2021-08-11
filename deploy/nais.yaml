@@ -13,7 +13,6 @@ spec:
   azure:
     application:
       enabled: true
-      tenant: nav.no
   port: 7080
   accessPolicy:
     inbound:
