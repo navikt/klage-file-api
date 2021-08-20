@@ -1,8 +1,10 @@
 {
   "buckets": [
-    "klagefiles-dev"
+    "klagefiles-dev",
+    "kabal-files-dev"
   ],
   "env": {
-    "GCS_BUCKET": "klagefiles-dev"
+    "GCS_BUCKET_KLAGE": "klagefiles-dev",
+    "GCS_BUCKET_KABAL": "kabal-files-dev"
   }
 }

@@ -19,6 +19,7 @@ spec:
       rules:
         - application: klage-arkiver-journalpost
         - application: klage-dittnav-api
+        - application: kabal-api
   liveness:
     path: /internal/health
     initialDelay: 20

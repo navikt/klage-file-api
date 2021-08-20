@@ -6,12 +6,10 @@ import com.google.cloud.storage.StorageOptions
 import no.nav.klage.getLogger
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.core.io.ByteArrayResource
-
 import org.springframework.core.io.Resource
 import org.springframework.stereotype.Service
 import org.springframework.web.multipart.MultipartFile
 import java.io.FileNotFoundException
-import java.util.*
 
 @Service
 class KlageService {
@@ -21,7 +19,7 @@ class KlageService {
         private val logger = getLogger(javaClass.enclosingClass)
     }
 
-    @Value("\${GCS_BUCKET}")
+    @Value("\${GCS_BUCKET_KLAGE}")
     private lateinit var bucket: String
 
     fun getKlageAsResource(id: String): Resource {

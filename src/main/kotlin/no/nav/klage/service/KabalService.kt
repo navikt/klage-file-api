@@ -14,41 +14,41 @@ import java.io.FileNotFoundException
 import java.util.*
 
 @Service
-class AttachmentService {
+class KabalService {
 
     companion object {
         @Suppress("JAVA_CLASS_ON_COMPANION")
         private val logger = getLogger(javaClass.enclosingClass)
     }
 
-    @Value("\${GCS_BUCKET_KLAGE}")
+    @Value("\${GCS_BUCKET_KABAL}")
     private lateinit var bucket: String
 
-    fun getAttachmentAsResource(id: String): Resource {
-        logger.debug("Getting attachment with id {}", id)
+    fun getKabalFileAsResource(id: String): Resource {
+        logger.debug("Getting Kabal file with id {}", id)
 
         val blob = getGcsStorage().get(bucket, id.toPath())
         if (blob == null || !blob.exists()) {
-            logger.warn("Attachment not found: {}", id)
+            logger.warn("Kabal file not found: {}", id)
             throw FileNotFoundException()
         }
 
         return ByteArrayResource(blob.getContent())
     }
 
-    fun deleteAttachment(id: String): Boolean {
-        logger.debug("Deleting attachment with id {}", id)
+    fun deleteKabalFile(id: String): Boolean {
+        logger.debug("Deleting Kabal file with id {}", id)
         return getGcsStorage().delete(BlobId.of(bucket, id.toPath())).also {
             if (it) {
-                logger.debug("Attachment was deleted.")
+                logger.debug("Kabal file was deleted.")
             } else {
-                logger.debug("Attachment was not found and could not be deleted.")
+                logger.debug("Kabal file was not found and could not be deleted.")
             }
         }
     }
 
-    fun saveAttachment(file: MultipartFile): String {
-        logger.debug("Saving attachment")
+    fun saveKabalFile(file: MultipartFile): String {
+        logger.debug("Saving Kabal file")
 
         val id = UUID.randomUUID().toString()
 
@@ -60,8 +60,7 @@ class AttachmentService {
         return id
     }
 
-    private fun String.toPath() = "attachment/$this"
+    private fun String.toPath() = "file/$this"
 
     private fun getGcsStorage() = StorageOptions.getDefaultInstance().service
-
 }

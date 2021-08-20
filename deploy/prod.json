@@ -1,8 +1,11 @@
 {
   "buckets": [
-    "klagefiles-production"
+    "klagefiles-production",
+    "kabal-files-production"
   ],
   "env": {
-    "GCS_BUCKET": "klagefiles-production"
+    "GCS_BUCKET_KLAGE": "klagefiles-production",
+    "GCS_BUCKET_KABAL": "kabal-files-production"
+
   }
 }
