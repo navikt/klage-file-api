@@ -1,4 +1,6 @@
 spring:
+  application:
+    name: klage-file-api
   main:
     banner-mode: OFF
   sleuth:
