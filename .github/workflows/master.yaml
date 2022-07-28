@@ -4,6 +4,8 @@ on:
   push:
     branches:
       - master
+    paths-ignore:
+      - '.github/dependabot.yml'
 
 env:
   IMAGE: ghcr.io/${{ github.repository }}/klage-file-api:${{ github.sha }}
