@@ -16,7 +16,7 @@ plugins {
     idea
 }
 
-java.sourceCompatibility = JavaVersion.VERSION_17
+java.sourceCompatibility = JavaVersion.VERSION_21
 
 apply(plugin = "io.spring.dependency-management")
 
@@ -54,7 +54,7 @@ idea {
 tasks.withType<KotlinCompile> {
     kotlinOptions{
         freeCompilerArgs = listOf("-Xjsr305=strict")
-        jvmTarget = "17"
+        jvmTarget = "21"
     }
 }
 
