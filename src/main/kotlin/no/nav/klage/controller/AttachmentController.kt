@@ -50,7 +50,7 @@ class AttachmentController(private val attachmentService: AttachmentService) {
         attachmentService.getAttachmentAsBlob(id).downloadTo(response.outputStream)
     }
 
-    @GetMapping("{id}/signerurl")
+    @GetMapping("{id}/signedurl")
     fun getDocumentAsSignedUrl(
         @PathVariable("id") id: String,
         response: HttpServletResponse
