@@ -49,6 +49,8 @@ spec:
   secureLogs:
     enabled: true
   webproxy: true
+  envFrom:
+    - secret: gcs-credentials
   gcp:
     buckets:
     {{#each buckets}}
