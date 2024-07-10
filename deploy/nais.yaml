@@ -50,7 +50,7 @@ spec:
     enabled: true
   webproxy: true
   envFrom:
-    - secret: gcs-credentials
+    - secret: gcs-klang-credentials
   gcp:
     buckets:
     {{#each buckets}}
