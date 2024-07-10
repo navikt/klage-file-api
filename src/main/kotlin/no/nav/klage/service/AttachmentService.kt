@@ -26,6 +26,19 @@ class AttachmentService(
         private val logger = getLogger(javaClass.enclosingClass)
     }
 
+    fun getAttachmentAsResource(id: String): ByteArrayResource {
+        logger.debug("Getting attachment with id {}", id)
+
+        val blob = gcsStorage.get(bucket, id.toPath())
+
+        if (blob == null || !blob.exists()) {
+            logger.warn("Attachment not found: {}", id)
+            throw FileNotFoundException()
+        }
+
+        return ByteArrayResource(blob.getContent())
+    }
+
     fun getAttachmentAsBlob(id: String): Blob {
         logger.debug("Getting attachment with id {}", id)
 
