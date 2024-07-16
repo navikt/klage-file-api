@@ -34,5 +34,3 @@ management:
         enabled: true
   tracing:
     enabled: false
-
-GCS_BUCKET: klagefiles
