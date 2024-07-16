@@ -6,8 +6,6 @@ import com.google.cloud.storage.BlobInfo
 import com.google.cloud.storage.Storage
 import no.nav.klage.getLogger
 import org.springframework.beans.factory.annotation.Value
-import org.springframework.core.io.ByteArrayResource
-import org.springframework.core.io.Resource
 import org.springframework.stereotype.Service
 import org.springframework.web.multipart.MultipartFile
 import java.io.FileNotFoundException
@@ -24,19 +22,6 @@ class AttachmentService(
     companion object {
         @Suppress("JAVA_CLASS_ON_COMPANION")
         private val logger = getLogger(javaClass.enclosingClass)
-    }
-
-    fun getAttachmentAsResource(id: String): ByteArrayResource {
-        logger.debug("Getting attachment with id {}", id)
-
-        val blob = gcsStorage.get(bucket, id.toPath())
-
-        if (blob == null || !blob.exists()) {
-            logger.warn("Attachment not found: {}", id)
-            throw FileNotFoundException()
-        }
-
-        return ByteArrayResource(blob.getContent())
     }
 
     fun getAttachmentAsBlob(id: String): Blob {
