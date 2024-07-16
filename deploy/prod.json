@@ -1,0 +1,8 @@
+{
+  "buckets": [
+    "klagefiles-production"
+  ],
+  "env": {
+    "GCS_BUCKET": "klagefiles-production"
+  }
+}

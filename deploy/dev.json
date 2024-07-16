@@ -1,0 +1,8 @@
+{
+  "buckets": [
+    "klagefiles-dev"
+  ],
+  "env": {
+    "GCS_BUCKET": "klagefiles-dev"
+  }
+}
