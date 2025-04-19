@@ -13,7 +13,7 @@ import org.springframework.web.multipart.MultipartFile
 import java.io.FileNotFoundException
 
 @RestController
-@ProtectedWithClaims(issuer = "azuread")
+@ProtectedWithClaims(issuer = "tokenx")
 @RequestMapping("klage")
 class KlageController(private val klageService: KlageService) {
 
