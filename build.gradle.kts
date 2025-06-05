@@ -1,6 +1,6 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
-val gcsVersion = "2.52.3"
+val gcsVersion = "2.53.0"
 val logstashVersion = "8.1"
 val tokenValidationVersion = "5.0.29"
 
