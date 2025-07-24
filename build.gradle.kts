@@ -1,18 +1,19 @@
+import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
-val gcsVersion = "2.52.3"
+val gcsVersion = "2.53.1"
 val logstashVersion = "8.1"
-val tokenValidationVersion = "5.0.29"
+val tokenValidationVersion = "5.0.30"
 
 repositories {
     mavenCentral()
 }
 
 plugins {
-    val kotlinVersion = "2.1.21"
+    val kotlinVersion = "2.2.0"
     kotlin("jvm") version kotlinVersion
     kotlin("plugin.spring") version kotlinVersion
-    id("org.springframework.boot") version "3.5.0"
+    id("org.springframework.boot") version "3.5.3"
     idea
 }
 
@@ -51,9 +52,9 @@ idea {
 }
 
 tasks.withType<KotlinCompile> {
-    kotlinOptions{
+    compilerOptions {
+        jvmTarget.set(JvmTarget.JVM_21)
         freeCompilerArgs = listOf("-Xjsr305=strict")
-        jvmTarget = "21"
     }
 }
 
