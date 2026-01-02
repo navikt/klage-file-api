@@ -1,0 +1,7 @@
+buckets:
+  - klagefiles-production
+envs:
+  - name: GCS_BUCKET
+    value: klagefiles-production
+
+springProfile: prod

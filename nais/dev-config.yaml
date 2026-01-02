@@ -1,0 +1,7 @@
+buckets:
+  - klagefiles-dev
+envs:
+  - name: GCS_BUCKET
+    value: klagefiles-dev
+
+springProfile: dev
