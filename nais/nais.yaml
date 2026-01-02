@@ -23,16 +23,22 @@ spec:
       rules:
         - application: klage-arkiver-journalpost
         - application: klage-dittnav-api
-  liveness:
+  startup:
     path: /internal/health
-    initialDelay: 20
-    timeout: 1
+    initialDelay: 10
+    timeout: 3
     periodSeconds: 5
     failureThreshold: 10
+  liveness:
+    path: /internal/health
+    timeout: 3
+    periodSeconds: 2
+    failureThreshold: 3
   readiness:
     path: /internal/health
-    initialDelay: 20
-    timeout: 1
+    timeout: 3
+    periodSeconds: 2
+    failureThreshold: 3
   resources:
     limits:
       memory: 512Mi
@@ -55,7 +61,7 @@ spec:
   env:
     - name: SPRING_PROFILES_ACTIVE
       value: {{springProfile}}
-    {{#each envs}}
-       - name: {{name}}
-         value: {{value}}
-    {{/each}}
+  {{#each envs}}
+     - name: {{name}}
+       value: {{value}}
+  {{/each}}
