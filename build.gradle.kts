@@ -3,10 +3,11 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 val gcsVersion = "2.61.0"
 val logstashVersion = "9.0"
-val tokenValidationVersion = "5.0.30"
+val tokenValidationVersion = "6.0.0"
 
 repositories {
     mavenCentral()
+    maven("https://github-package-registry-mirror.gc.nav.no/cached/maven-release")
 }
 
 plugins {
@@ -38,11 +39,6 @@ dependencies {
     implementation("no.nav.security:token-validation-spring:$tokenValidationVersion")
 
     implementation("com.google.cloud:google-cloud-storage:$gcsVersion")
-
-    testImplementation("org.springframework.boot:spring-boot-starter-test") {
-        exclude(group = "org.junit.vintage", module = "org.junit.vintage")
-    }
-    testImplementation("org.junit.jupiter:junit-jupiter-engine")
 }
 
 idea {
