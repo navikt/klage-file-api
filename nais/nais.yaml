@@ -40,6 +40,8 @@ spec:
     periodSeconds: 2
     failureThreshold: 3
   resources:
+    limits:
+      memory: 2048Mi
     requests:
       cpu: 50m
       memory: 512Mi
