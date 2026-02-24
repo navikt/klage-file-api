@@ -40,11 +40,9 @@ spec:
     periodSeconds: 2
     failureThreshold: 3
   resources:
-    limits:
-      memory: 512Mi
     requests:
       cpu: 50m
-      memory: 128Mi
+      memory: 512Mi
   replicas:
     min: 2
     max: 4

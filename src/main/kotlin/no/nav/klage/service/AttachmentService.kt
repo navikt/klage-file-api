@@ -5,12 +5,12 @@ import com.google.cloud.storage.BlobInfo
 import com.google.cloud.storage.StorageOptions
 import no.nav.klage.getLogger
 import org.springframework.beans.factory.annotation.Value
-import org.springframework.core.io.ByteArrayResource
-
+import org.springframework.core.io.InputStreamResource
 import org.springframework.core.io.Resource
 import org.springframework.stereotype.Service
 import org.springframework.web.multipart.MultipartFile
 import java.io.FileNotFoundException
+import java.nio.channels.Channels
 import java.util.*
 
 @Service
@@ -33,7 +33,7 @@ class AttachmentService {
             throw FileNotFoundException()
         }
 
-        return ByteArrayResource(blob.getContent())
+        return InputStreamResource(Channels.newInputStream(blob.reader()))
     }
 
     fun deleteAttachment(id: String): Boolean {
@@ -53,7 +53,7 @@ class AttachmentService {
         val id = UUID.randomUUID().toString()
 
         val blobInfo = BlobInfo.newBuilder(BlobId.of(bucket, id.toPath())).build()
-        getGcsStorage().create(blobInfo, file.bytes)
+        getGcsStorage().createFrom(blobInfo, file.inputStream)
 
         logger.debug("Attachment saved, and id is {}", id)
 
