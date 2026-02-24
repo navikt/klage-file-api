@@ -53,7 +53,7 @@ class AttachmentService {
         val id = UUID.randomUUID().toString()
 
         val blobInfo = BlobInfo.newBuilder(BlobId.of(bucket, id.toPath())).build()
-        getGcsStorage().create(blobInfo, file.bytes)
+        getGcsStorage().createFrom(blobInfo, file.inputStream)
 
         logger.debug("Attachment saved, and id is {}", id)
 
