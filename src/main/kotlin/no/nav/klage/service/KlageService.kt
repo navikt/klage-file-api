@@ -5,13 +5,13 @@ import com.google.cloud.storage.BlobInfo
 import com.google.cloud.storage.StorageOptions
 import no.nav.klage.getLogger
 import org.springframework.beans.factory.annotation.Value
-import org.springframework.core.io.ByteArrayResource
-
+import org.springframework.core.io.InputStreamResource
 import org.springframework.core.io.Resource
 import org.springframework.stereotype.Service
 import org.springframework.web.multipart.MultipartFile
 import java.io.FileNotFoundException
-import java.util.*
+import java.nio.ByteBuffer
+import java.nio.channels.Channels
 
 @Service
 class KlageService {
@@ -33,7 +33,7 @@ class KlageService {
             throw FileNotFoundException()
         }
 
-        return ByteArrayResource(blob.getContent())
+        return InputStreamResource(Channels.newInputStream(blob.reader()))
     }
 
     fun deleteKlage(id: String): Boolean {
@@ -51,7 +51,16 @@ class KlageService {
         logger.debug("Saving klage")
 
         val blobInfo = BlobInfo.newBuilder(BlobId.of(bucket, id.toPath())).build()
-        val result = getGcsStorage().create(blobInfo, file.bytes).exists()
+        file.inputStream.use { inputStream ->
+            getGcsStorage().writer(blobInfo).use { writer ->
+                val buffer = ByteArray(1024 * 1024) // 1 MB buffer
+                var bytesRead: Int
+                while (inputStream.read(buffer).also { bytesRead = it } != -1) {
+                    writer.write(ByteBuffer.wrap(buffer, 0, bytesRead))
+                }
+            }
+        }
+        val result = getGcsStorage().get(bucket, id.toPath())?.exists() ?: false
 
         logger.debug("Klage saved, and id is {}", id)
 

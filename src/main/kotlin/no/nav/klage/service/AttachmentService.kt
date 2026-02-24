@@ -10,6 +10,7 @@ import org.springframework.core.io.Resource
 import org.springframework.stereotype.Service
 import org.springframework.web.multipart.MultipartFile
 import java.io.FileNotFoundException
+import java.nio.ByteBuffer
 import java.nio.channels.Channels
 import java.util.*
 
@@ -53,7 +54,15 @@ class AttachmentService {
         val id = UUID.randomUUID().toString()
 
         val blobInfo = BlobInfo.newBuilder(BlobId.of(bucket, id.toPath())).build()
-        getGcsStorage().createFrom(blobInfo, file.inputStream)
+        file.inputStream.use { inputStream ->
+            getGcsStorage().writer(blobInfo).use { writer ->
+                val buffer = ByteArray(1024 * 1024) // 1 MB buffer
+                var bytesRead: Int
+                while (inputStream.read(buffer).also { bytesRead = it } != -1) {
+                    writer.write(ByteBuffer.wrap(buffer, 0, bytesRead))
+                }
+            }
+        }
 
         logger.debug("Attachment saved, and id is {}", id)
 
