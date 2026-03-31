@@ -1,7 +1,7 @@
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
-val gcsVersion = "2.64.0"
+val gcsVersion = "2.64.1"
 val logstashVersion = "9.0"
 val tokenValidationVersion = "6.0.4"
 
@@ -14,7 +14,7 @@ plugins {
     val kotlinVersion = "2.3.20"
     kotlin("jvm") version kotlinVersion
     kotlin("plugin.spring") version kotlinVersion
-    id("org.springframework.boot") version "4.0.4"
+    id("org.springframework.boot") version "4.0.5"
     idea
 }
 
