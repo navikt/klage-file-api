@@ -3,7 +3,7 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 val gcsVersion = "2.68.0"
 val logstashVersion = "9.0"
-val tokenValidationVersion = "6.0.7"
+val tokenValidationVersion = "6.0.8"
 
 repositories {
     mavenCentral()
