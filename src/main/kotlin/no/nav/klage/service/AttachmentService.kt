@@ -12,11 +12,10 @@ import org.springframework.web.multipart.MultipartFile
 import java.io.FileNotFoundException
 import java.nio.ByteBuffer
 import java.nio.channels.Channels
-import java.util.*
+import java.util.UUID
 
 @Service
 class AttachmentService {
-
     companion object {
         @Suppress("JAVA_CLASS_ON_COMPANION")
         private val logger = getLogger(javaClass.enclosingClass)
@@ -72,5 +71,4 @@ class AttachmentService {
     private fun String.toPath() = "attachment/$this"
 
     private fun getGcsStorage() = StorageOptions.getDefaultInstance().service
-
 }
