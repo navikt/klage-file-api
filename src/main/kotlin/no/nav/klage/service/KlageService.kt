@@ -15,7 +15,6 @@ import java.nio.channels.Channels
 
 @Service
 class KlageService {
-
     companion object {
         @Suppress("JAVA_CLASS_ON_COMPANION")
         private val logger = getLogger(javaClass.enclosingClass)
@@ -47,7 +46,10 @@ class KlageService {
         }
     }
 
-    fun saveKlage(file: MultipartFile, id: String): Boolean {
+    fun saveKlage(
+        file: MultipartFile,
+        id: String,
+    ): Boolean {
         logger.debug("Saving klage")
 
         val blobInfo = BlobInfo.newBuilder(BlobId.of(bucket, id.toPath())).build()
@@ -70,5 +72,4 @@ class KlageService {
     private fun String.toPath() = "klage/$this"
 
     private fun getGcsStorage() = StorageOptions.getDefaultInstance().service
-
 }
