@@ -6,7 +6,7 @@ import org.jlleitschuh.gradle.ktlint.reporter.ReporterType
 val gcsVersion = "2.75.0"
 val ktlintVersion = "1.8.0"
 val logstashVersion = "9.0"
-val tokenValidationVersion = "6.0.12"
+val klageAuthVersion = "0.3.0"
 
 repositories {
     mavenCentral()
@@ -40,9 +40,17 @@ dependencies {
     implementation("ch.qos.logback:logback-classic")
     implementation("net.logstash.logback:logstash-logback-encoder:$logstashVersion")
     implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
-    implementation("no.nav.security:token-validation-spring:$tokenValidationVersion")
+    implementation("org.springframework.boot:spring-boot-starter-security-oauth2-resource-server")
+    implementation("no.nav.klage:klage-auth:$klageAuthVersion")
 
     implementation("com.google.cloud:google-cloud-storage:$gcsVersion")
+
+    testImplementation("org.springframework.boot:spring-boot-starter-test") {
+        exclude(group = "org.junit.vintage", module = "org.junit.vintage")
+    }
+    testImplementation("org.springframework.boot:spring-boot-starter-webmvc-test")
+    testImplementation("no.nav.klage:klage-auth-test:$klageAuthVersion")
+    testImplementation("org.junit.jupiter:junit-jupiter-engine")
 }
 
 idea {
