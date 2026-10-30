@@ -8,6 +8,10 @@ spring:
       max-request-size: 50MB
       max-file-size: 50MB
       file-size-threshold: 2MB
+  web:
+    error:
+      include-message: never
+      include-stacktrace: never
 
 server:
   port: 7080
@@ -15,16 +19,10 @@ server:
     whitelabel:
       enabled: false
 
-#Token validation
-no.nav.security.jwt:
-  issuer.azuread:
-    discoveryurl: ${AZURE_APP_WELL_KNOWN_URL}
-    accepted_audience: ${AZURE_APP_CLIENT_ID}
-
 management:
   endpoint:
     health:
-      show-details: always
+      show-details: never
   endpoints.web:
     exposure:
       include: info, health, metrics, prometheus
