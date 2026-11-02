@@ -6,7 +6,7 @@ import org.jlleitschuh.gradle.ktlint.reporter.ReporterType
 val gcsVersion = "2.75.0"
 val ktlintVersion = "1.8.0"
 val logstashVersion = "9.0"
-val klageAuthVersion = "0.3.0"
+val klageAuthVersion = "0.4.0"
 
 repositories {
     mavenCentral()
