@@ -24,7 +24,11 @@ plugins {
     idea
 }
 
-java.sourceCompatibility = JavaVersion.VERSION_21
+java {
+    toolchain {
+        languageVersion.set(JavaLanguageVersion.of(25))
+    }
+}
 
 dependencies {
     implementation(kotlin("stdlib"))
@@ -107,7 +111,7 @@ tasks.named("detekt") {
 }
 
 tasks.withType<dev.detekt.gradle.Detekt>().configureEach {
-    jvmTarget.set(JvmTarget.JVM_21.target)
+    jvmTarget.set(JvmTarget.JVM_25.target)
     reports {
         html.required.set(true)
         checkstyle.required.set(true)
@@ -122,7 +126,6 @@ tasks.named("check") {
 
 tasks.withType<KotlinCompile> {
     compilerOptions {
-        jvmTarget.set(JvmTarget.JVM_21)
         freeCompilerArgs = listOf("-Xjsr305=strict")
     }
 }
