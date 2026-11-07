@@ -3,7 +3,7 @@ import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 import org.jlleitschuh.gradle.ktlint.reporter.ReporterType
 
-val gcsVersion = "2.75.0"
+val gcsVersion = "2.76.0"
 val ktlintVersion = "1.8.0"
 val logstashVersion = "9.0"
 val klageAuthVersion = "0.4.0"
@@ -14,7 +14,7 @@ repositories {
 }
 
 plugins {
-    val kotlinVersion = "2.4.20"
+    val kotlinVersion = "2.4.21"
     kotlin("jvm") version kotlinVersion
     kotlin("plugin.spring") version kotlinVersion
     id("org.springframework.boot") version "4.1.2"
