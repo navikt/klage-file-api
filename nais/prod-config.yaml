@@ -1,6 +1,8 @@
 buckets:
   - klagefiles-production
 envs:
+  - name: JAVA_TOOL_OPTIONS
+    value: "-Xms256m -Xmx2048m --enable-native-access=ALL-UNNAMED"
   - name: GCS_BUCKET
     value: klagefiles-production
 

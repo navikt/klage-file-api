@@ -1,6 +1,8 @@
 buckets:
   - klagefiles-dev
 envs:
+  - name: JAVA_TOOL_OPTIONS
+    value: "-Xms256m -Xmx2048m -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:5005 --enable-native-access=ALL-UNNAMED"
   - name: GCS_BUCKET
     value: klagefiles-dev
 
