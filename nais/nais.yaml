@@ -62,9 +62,7 @@ spec:
     - name: SPRING_PROFILES_ACTIVE
       value: {{springProfile}}
     - name: JAVA_TOOL_OPTIONS
-      value: -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:5005
-    - name: JAVA_OPTS
-      value: "-Xms256m -Xmx2048m"
+      value: "-Xms256m -Xmx2048m -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:5005 --enable-native-access=ALL-UNNAMED"
   {{#each envs}}
     - name: {{name}}
       value: {{value}}
